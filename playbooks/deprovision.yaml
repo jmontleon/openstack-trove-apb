@@ -1,0 +1,8 @@
+- name: openstack-trove-apb deovision
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  roles:
+  - openstack-trove-apb
+  vars:
+    state: absent

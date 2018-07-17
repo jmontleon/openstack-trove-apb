@@ -1,0 +1,86 @@
+---
+
+version: 1.0
+name: openstack-trove-apb
+description:  Openstack Trove apb implementation
+bindable: false
+async: optional
+tags:
+  - queue
+metadata:
+  documentationUrl: https://wiki.openstack.org/wiki/Trove 
+  longDescription: An apb that deploys an openstack Trove DB
+  displayName: Openstack Trove (APB)
+  console.openshift.io/iconClass: icon-openstack
+  providerDisplayName: "Red Hat, Inc."
+plans:
+  - name: default
+    description: A single Trove DB
+    free: true
+    metadata:
+      displayName: Default
+      longDescription: This plan provides a single Openstack Trove DB
+      cost: $0.00
+    parameters:
+      - name: datastore_type
+        type: string
+        title: Datastore Type
+        description: Type of Datastore
+        required: true
+      - name: datastore_version
+        type: string
+        title: Datastore Version
+        description: Version of Datastore
+        required: true
+      - name: flavor
+        type: string
+        title: Instance Flavor
+        description: Type of instance (flavor) to be used
+        required: true
+      - name: size
+        type: string
+        title: Size
+        description: Size of the Datastore volume in GB
+        required: true
+      - name: network_name
+        type: string
+        title: Network Name
+        description: Name of the network to connect the DB to
+        required: true
+      - name: database
+        type: string
+        title: Database
+        description: Name of the database to be created
+        required: true
+      - name: database_user
+        type: string
+        title: Database User
+        description: Name of the database user
+        required: true
+      - name: database_pass
+        type: string
+        title: Database Password
+        display_type: password
+        description: Password for the database user
+        required: true
+      - name: user
+        title: User
+        type: string
+        required: true
+        display_group: "Openstack Authentication"
+      - name: pass
+        type: string
+        title: Password
+        required: true
+        display_type: password
+        display_group: "Openstack Authentication"
+      - name: project
+        title: Project
+        type: string
+        required: true
+        display_group: "Openstack Authentication"
+      - name: url
+        title: Identity URL
+        type: string
+        required: true
+        display_group: "Openstack Authentication"

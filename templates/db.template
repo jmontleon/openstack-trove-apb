@@ -1,0 +1,53 @@
+heat_template_version: 2015-10-15
+
+description: Creates a Trove Database instance
+
+parameters:
+  datastore_type:
+    type: string
+    label: Datastore Type
+    description: Type of Datastore
+  datastore_version:
+    type: string
+    label: Datastore Version
+    description: Version of Datastore
+  flavor:
+    type: string
+    label: Instance Flavor 
+    description: Type of instance (flavor) to be used
+  size:
+    type: string
+    label: Size
+    description: Size of the Datastore volume in GB
+  network_name:
+    type: string
+    label: Network Name
+    description: Name of the network to connect the DB to
+  database:
+    type: string
+    label: Database
+    description: Name of the database to be created
+  database_user:
+    type: string
+    label: User
+    description: Name of the database user
+  database_pass:
+    type: string
+    label: Password
+    description: Password for the database user
+
+resources:
+  service_db:
+    type: OS::Trove::Instance
+    properties:
+      datastore_type: { get_param: datastore_type }
+      datastore_version: { get_param: datastore_version }
+      flavor: { get_param: flavor }
+      size: { get_param: size }
+      networks: [{"network": { get_param: network_name }}]
+      databases:
+      - name: { get_param: database }
+      users:
+      - name: { get_param: database_user }
+        password: { get_param: database_pass }
+        databases: [ { get_param: database } ]

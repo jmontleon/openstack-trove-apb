@@ -1,0 +1,26 @@
+---
+- name: process stack
+  ignore_errors: True
+  register: stack_create
+  os_stack:
+    name: "{{ service }}-{{ _apb_service_instance_id }}"
+    state: "{{ state }}"
+    template: "{{ role_path }}/templates/{{ service }}.template"
+    environment:
+    validate_certs: no
+    parameters:
+      datastore_type: "{{ datastore_type }}"
+      datastore_version: "{{ datastore_version }}"
+      flavor: "{{ flavor }}"
+      size: "{{ size }}"
+      network_name: "{{ network_name }}"
+      database: "{{ database }}"
+      database_user: "{{ database_user }}"
+      database_pass: "{{ database_pass }}"
+    auth:
+      auth_url: "{{ url }}"
+      username: "{{ user }}"
+      password: "{{ pass }}"
+      project_name: "{{ project }}"
+      project_domain_name: default
+      user_domain_name: default
